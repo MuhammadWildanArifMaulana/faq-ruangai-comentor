@@ -115,20 +115,38 @@ document.addEventListener("DOMContentLoaded", function () {
     const counts = readCounts();
     if (choice === "yes") counts.yes = (counts.yes || 0) + 1;
     if (choice === "no") counts.no = (counts.no || 0) + 1;
-    writeCounts(counts);
-    localStorage.setItem(VOTE_KEY, choice);
-    // hide buttons, show confirmation, then reveal animated results
+    // Optimistic UI + server-backed update via Netlify Function
     hideButtons();
     const confirmEl = document.getElementById("voteConfirm");
     if (confirmEl) {
-      confirmEl.textContent =
-        "Terima kasih untuk suaramu — hasil akan tampil sebentar lagi!";
+      confirmEl.textContent = "Terima kasih untuk suaramu — mengirim suara...";
       confirmEl.classList.add("show");
     }
-    // show results after tiny delay so user sees confirmation
-    setTimeout(() => {
-      showResults();
-    }, 700);
+
+    // Try sending to serverless function. If it fails, fallback to local only.
+    fetch("/.netlify/functions/vote", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ choice }),
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error("Function error");
+        const data = await res.json();
+        // data should contain aggregated { yes, no }
+        writeCounts(data);
+        localStorage.setItem(VOTE_KEY, choice);
+        confirmEl &&
+          (confirmEl.textContent = "Suara terkirim! Menampilkan hasil...");
+        setTimeout(showResults, 600);
+      })
+      .catch((err) => {
+        console.warn("Server vote failed, falling back to localStorage", err);
+        // fallback: store locally only
+        writeCounts(counts);
+        localStorage.setItem(VOTE_KEY, choice);
+        confirmEl && (confirmEl.textContent = "Suara disimpan secara lokal.");
+        setTimeout(showResults, 600);
+      });
   }
 
   if (

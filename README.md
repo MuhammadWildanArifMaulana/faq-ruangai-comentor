@@ -44,3 +44,38 @@ Lisensi
 - Bebas digunakan untuk keperluan internal.
 
 Jika mau, saya bisa tambahkan instruksi testing otomatis atau screenshot preview untuk beberapa breakpoint—beri tahu saja apa yang Anda butuhkan.
+
+---
+
+## Menambahkan voting ter-aggregate (Netlify Functions + Supabase)
+
+Langkah singkat untuk membuat voting tersedia di semua perangkat (global):
+
+1. Buat project di Supabase ([https://supabase.com](https://supabase.com)) dan catat `SUPABASE_URL`.
+2. Di Supabase SQL editor jalankan SQL inisialisasi berikut:
+
+```sql
+create table if not exists votes (
+  id int primary key,
+  yes bigint default 0,
+  no bigint default 0
+);
+
+insert into votes (id, yes, no) values (1, 0, 0) on conflict (id) do nothing;
+```
+
+1. Dapatkan Service Role Key dari Settings → API → Service role key (ini sensitif).
+
+1. Di Netlify, buka Site settings → Build & deploy → Environment → Environment variables, tambahkan:
+
+- `SUPABASE_URL` = (nilai dari Supabase)
+- `SUPABASE_SERVICE_ROLE_KEY` = (service role key)
+
+1. File fungsi Netlify sudah ditambahkan di `netlify/functions/vote.js` dan client-side `script.js` sudah diperbarui untuk memanggil endpoint `/.netlify/functions/vote`.
+
+1. Push ke repo dan Netlify akan otomatis deploy situs dan fungsi. Coba vote dari beberapa perangkat — semua akan mengupdate counts di Supabase.
+
+Keamanan & catatan:
+
+- Jangan pernah menaruh `SUPABASE_SERVICE_ROLE_KEY` di kode klien. Simpan hanya di Netlify environment variables.
+- Untuk produksi, pertimbangkan pembatasan (rate-limit/CAPTCHA) jika perlu.
