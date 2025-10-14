@@ -19,6 +19,12 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Theme toggle (top-right) -->
+    <div class="theme-toggle" id="themeToggleWrap">
+      <button id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        🌙
+      </button>
+    </div>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-lg-9 col-xl-8">
@@ -145,69 +151,7 @@
                       rel="noopener noreferrer"
                       >https://meet.google.com/tna-zxxz-fgn</a
                     >
-                    eitss, jadwalnya simak di group yaa. Mau sesi live offline
-                    gak? coba vote dulu dong 👇
-
-                    <!-- Voting widget: localStorage-based (one vote per browser) -->
-                    <div id="liveVote" class="live-vote mt-3">
-                      <div class="vote-buttons d-flex gap-2">
-                        <button id="voteYes" class="btn btn-primary">
-                          Let’s gooo! 🚀
-                        </button>
-                        <button id="voteNo" class="btn btn-outline-primary">
-                          Belum bisa join offline, tapi kalo online aku hadir!
-                          😎
-                        </button>
-                      </div>
-
-                      <!-- confirmation message (hidden until vote) -->
-                      <div
-                        id="voteConfirm"
-                        class="vote-confirmation mt-2"
-                        aria-live="polite"
-                      ></div>
-
-                      <div id="voteResults" class="mt-3">
-                        <div
-                          class="vote-row d-flex justify-content-between align-items-center mb-1"
-                        >
-                          <small>Let’s gooo! 🚀</small>
-                          <small id="countYes">0</small>
-                        </div>
-                        <div class="progress mb-2">
-                          <progress
-                            id="barYes"
-                            class="progress-bar"
-                            value="0"
-                            max="100"
-                            title="Let’s gooo! votes"
-                          >
-                            0%
-                          </progress>
-                        </div>
-
-                        <div
-                          class="vote-row d-flex justify-content-between align-items-center mb-1"
-                        >
-                          <small
-                            >Belum bisa join offline, tapi kalo online aku
-                            hadir! 😎</small
-                          >
-                          <small id="countNo">0</small>
-                        </div>
-                        <div class="progress">
-                          <progress
-                            id="barNo"
-                            class="progress-bar bg-secondary"
-                            value="0"
-                            max="100"
-                            title="Belum sempat join votes"
-                          >
-                            0%
-                          </progress>
-                        </div>
-                      </div>
-                    </div>
+                    eitss, jadwalnya simak di group yaa.
                   </div>
                 </div>
               </div>
