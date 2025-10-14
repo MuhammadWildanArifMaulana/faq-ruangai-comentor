@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ RuangAI Class</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-9 col-xl-8">
+          <header class="simple-header">
+            <img src="img/logo.png" alt="RuangAI Logo" class="header-logo" />
+            <h1>FAQ RuangAI Class</h1>
+            <p>
+              Halaman ini berisi pertanyaan dan jawaban yang sering ditanyakan
+              di kelas, Materi dan link yang digunakan.
+            </p>
+          </header>
+
+          <section class="faq-section">
+            <div class="search-container">
+              <div class="search-wrapper">
+                <span class="search-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    class="bi bi-search"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                    />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  id="faqSearch"
+                  class="form-control search-input"
+                  placeholder="Search FAQs (questions, answers, categories)..."
+                />
+              </div>
+              <p class="faq-counter mt-2" id="faqCounter"></p>
+            </div>
+
+            <!-- accordion: single container with unique collapse IDs -->
+            <div class="accordion" id="faqAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="false"
+                    aria-controls="collapseOne"
+                  >
+                    Aku harus ngapain sih di RuangAI?
+                  </button>
+                </h2>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Tonton 33 video dan ikut minimal 1 sesi live mentoring
+                    (jangan lupa isi absen & feedback yang dishare saat sesi
+                    live), dan aktif di grup biar makin nyatu vibes
+                    belajarnya.🤩
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    Cara nonton 33 video itu gimana?
+                  </button>
+                </h2>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Kamu bisa klik link ini ->
+                    <a
+                      href="https://www.ruangai.id/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >https://www.ruangai.id/</a
+                    >
+                    > <b>Dashboard</b> > <b>Kelas Saya</b> >
+                    <b>Dasar-dasar dan Penggunaan Generative AI</b>.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                    Sesi live nya dimana? dan kapan?
+                  </button>
+                </h2>
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Kamu bisa klik link ini ->
+                    <a
+                      href="https://meet.google.com/tna-zxxz-fgn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >https://meet.google.com/tna-zxxz-fgn</a
+                    >
+                    eitss, jadwalnya simak di group yaa. Mau sesi live offline
+                    gak? coba vote dulu dong 👇
+
+                    <!-- Voting widget: localStorage-based (one vote per browser) -->
+                    <div id="liveVote" class="live-vote mt-3">
+                      <div class="vote-buttons d-flex gap-2">
+                        <button id="voteYes" class="btn btn-primary">
+                          Let’s gooo! 🚀
+                        </button>
+                        <button id="voteNo" class="btn btn-outline-primary">
+                          Belum bisa join offline, tapi kalo online aku hadir!
+                          😎
+                        </button>
+                      </div>
+
+                      <!-- confirmation message (hidden until vote) -->
+                      <div
+                        id="voteConfirm"
+                        class="vote-confirmation mt-2"
+                        aria-live="polite"
+                      ></div>
+
+                      <div id="voteResults" class="mt-3">
+                        <div
+                          class="vote-row d-flex justify-content-between align-items-center mb-1"
+                        >
+                          <small>Let’s gooo! 🚀</small>
+                          <small id="countYes">0</small>
+                        </div>
+                        <div class="progress mb-2">
+                          <progress
+                            id="barYes"
+                            class="progress-bar"
+                            value="0"
+                            max="100"
+                            title="Let’s gooo! votes"
+                          >
+                            0%
+                          </progress>
+                        </div>
+
+                        <div
+                          class="vote-row d-flex justify-content-between align-items-center mb-1"
+                        >
+                          <small
+                            >Belum bisa join offline, tapi kalo online aku
+                            hadir! 😎</small
+                          >
+                          <small id="countNo">0</small>
+                        </div>
+                        <div class="progress">
+                          <progress
+                            id="barNo"
+                            class="progress-bar bg-secondary"
+                            value="0"
+                            max="100"
+                            title="Belum sempat join votes"
+                          >
+                            0%
+                          </progress>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour"
+                    aria-expanded="false"
+                    aria-controls="collapseFour"
+                  >
+                    Emang dapet apa sih setelah selesai?
+                  </button>
+                </h2>
+                <div
+                  id="collapseFour"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Kamu bakal dapet sertifikat resmi🤫, bisa lanjut ke kelas
+                    lanjutan📈, dan dapet reward keren dari RuangAI &
+                    Codepolitan🔥.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseFive"
+                    aria-expanded="false"
+                    aria-controls="collapseFive"
+                  >
+                    Bisa belajar kapan aja gak?
+                  </button>
+                </h2>
+                <div
+                  id="collapseFive"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Bisa banget! Materinya fleksibel, bisa kamu tonton kapan pun
+                    dan di mana pun. 🙀
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseSix"
+                    aria-expanded="false"
+                    aria-controls="collapseSix"
+                  >
+                    Kapan aku harus selesaiin 33 video dan sesi live biar lulus
+                    dan dapet sertifikat?
+                  </button>
+                </h2>
+                <div
+                  id="collapseSix"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Aku saranin kepada temen-temen untuk menyelesaikan sebelum
+                    akhir bulan Oktober, soalnya ada reward untuk 200 lulusan
+                    tercepat, jadi jangan sampai kalah cepet sama peserta dari
+                    tim co-mentor lain😼. Setelah itu, datamu bakal diverifikasi
+                    biar sertifikat bisa diterbitin. 🎓
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseSeven"
+                    aria-expanded="false"
+                    aria-controls="collapseSeven"
+                  >
+                    Gimana caranya biar aku ga ketinggalan info-info menarik
+                    seperti reward, dll.?
+                  </button>
+                </h2>
+                <div
+                  id="collapseSeven"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Biar gak ketinggalan info keren kayak reward, update
+                    program, atau event seru RuangAI, langsung follow Instagram
+                    <a
+                      href="https://www.instagram.com/ruangai.id?igsh=M24waGE1M3Z4YzBv"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >@ruangai.id</a
+                    >
+                    ya! 🎉 Di sana semua info terbaru dan pengumuman penting
+                    selalu dibagikan duluan. 🚀
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseEight"
+                    aria-expanded="false"
+                    aria-controls="collapseEight"
+                  >
+                    Kalau ada error atau kendala, gimana dong?
+                  </button>
+                </h2>
+                <div
+                  id="collapseEight"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Langsung aja chat
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=6285792620225&text&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Co-Mentor</a
+                    >
+                    , kasih tau kendalanya + kirim screenshot biar cepet dibantu
+                    tapi aku saranin lapor kendalanya di group ya, biar
+                    temen-temen yang lain mungkin mengalami kendala yang sama
+                    biar cepet terselesaikan. 🤩
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseNine"
+                    aria-expanded="false"
+                    aria-controls="collapseNine"
+                  >
+                    Absen sesi live gimana caranya?
+                  </button>
+                </h2>
+                <div
+                  id="collapseNine"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Isi Google Form yang dikasih pas live session. Simpel banget
+                    tinggal isi nama, tanggal, topik pembahasan, feedback, dan
+                    kirim! ✅
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTen"
+                    aria-expanded="false"
+                    aria-controls="collapseTen"
+                  >
+                    Jadi kesimpulannya aku harus ngapain dulu nih?
+                  </button>
+                </h2>
+                <div
+                  id="collapseTen"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Pertama, selesaiin 33 video dulu, setelah itu ikut sesi live
+                    dengan Co-Mentor yang jadwalnya kita sepakati bersama di
+                    group biar sama-sama enak. sesimpel itu gaess!😻
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseEleven"
+                    aria-expanded="false"
+                    aria-controls="collapseEleven"
+                  >
+                    Aku masih ada yang bingung nih, aku harus gimana?
+                  </button>
+                </h2>
+                <div
+                  id="collapseEleven"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Kalau kamu masih bingung, nggak usah panik! 😄 Langsung aja
+                    chat
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=6285792620225&text&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Co-Mentor</a
+                    >
+                    kamu lewat grup atau japri, mereka siap bantu jawab dan
+                    arahkan kamu biar gak bingung lagi.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

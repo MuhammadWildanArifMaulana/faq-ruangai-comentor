@@ -1,0 +1,268 @@
+/* Palet Warna Baru */
+:root {
+  --bg-dark: #111827; /* Hitam Pekat */
+  --bg-surface: #1f2937; /* Abu-abu Gelap */
+  --border-color: #374151;
+  --text-primary: #ffffff; /* Putih */
+  --text-secondary: #9ca3af;
+  --accent-blue: #3b82f6; /* Biru */
+  --accent-orange: #f97316; /* Oranye */
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: "Poppins", sans-serif;
+}
+
+.simple-header {
+  padding: 1.4rem 0 0.25rem 0; /* tighter bottom so search moves closer (fine-tune) */
+  text-align: center;
+}
+.header-logo {
+  max-height: 60px;
+  margin-bottom: 1.1rem; /* slightly wider gap between logo and title (fine-tune) */
+}
+.simple-header h1 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--text-primary);
+}
+.simple-header p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0.4rem;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Kontainer Utama & Perataan */
+.faq-section {
+  padding: 2rem 0 4rem 0;
+}
+
+/* Gaya Search Bar */
+.search-container {
+  margin-bottom: 1rem;
+}
+.search-input {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 20px 12px 50px;
+  height: 52px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+.search-input:focus {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+.search-wrapper {
+  position: relative;
+}
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+.faq-counter {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+}
+
+/* Gaya Accordion */
+.accordion {
+  --bs-accordion-bg: var(--bg-surface);
+  --bs-accordion-border-color: var(--border-color);
+  --bs-accordion-border-radius: 8px;
+  --bs-accordion-btn-color: var(--text-primary);
+  --bs-accordion-active-bg: var(--bg-surface);
+  --bs-accordion-active-color: var(--accent-orange);
+  --bs-accordion-btn-focus-box-shadow: none;
+}
+.accordion-item {
+  margin-bottom: 1rem;
+}
+.accordion-button {
+  font-weight: 600;
+}
+.accordion-button:not(.collapsed) {
+  box-shadow: none;
+}
+.accordion-button::after {
+  filter: invert(80%) sepia(10%) saturate(200%) hue-rotate(180deg);
+}
+.accordion-button:not(.collapsed)::after {
+  filter: invert(59%) sepia(93%) saturate(1451%) hue-rotate(345deg)
+    brightness(98%) contrast(97%);
+}
+.accordion-body {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.accordion-body a {
+  color: var(--accent-blue);
+  font-weight: 500;
+  text-decoration: none;
+}
+.accordion-body a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments: tablet and mobile */
+@media (max-width: 991.98px) {
+  .simple-header {
+    padding: 1.1rem 0 0.35rem 0; /* tighten header->search a bit on tablet (fine-tune) */
+  }
+  .simple-header h1 {
+    font-size: 1.9rem;
+  }
+  .simple-header p {
+    font-size: 0.95rem;
+    max-width: 460px;
+  }
+  .header-logo {
+    max-height: 50px;
+    margin-bottom: 0.9rem; /* keep logo-title gap reasonable on tablet (fine-tune) */
+  }
+  .search-input {
+    height: 48px;
+    padding: 10px 16px 10px 44px;
+  }
+  .search-icon {
+    left: 16px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .simple-header {
+    padding: 0.5rem 0 0.1rem 0; /* slightly tighter on mobile (fine-tune) */
+  }
+  .simple-header h1 {
+    font-size: 1.6rem;
+  }
+  .simple-header p {
+    font-size: 0.9rem;
+    max-width: 340px;
+  }
+  .header-logo {
+    max-height: 44px;
+    margin-bottom: 0.7rem; /* slightly larger gap between logo and title on mobile (fine-tune) */
+  }
+  .search-input {
+    height: 44px;
+    padding: 8px 12px 8px 40px;
+    font-size: 0.95rem;
+  }
+  .search-icon {
+    left: 12px;
+  }
+  .accordion-button {
+    font-size: 0.95rem;
+  }
+}
+
+/* Voting widget styles */
+.live-vote .vote-buttons .btn {
+  white-space: normal;
+}
+.live-vote #voteResults {
+  display: none;
+}
+.live-vote .progress-bar {
+  min-width: 40px;
+  transition: width 800ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 300ms ease;
+}
+
+/* Tidy voting rows and progress visuals */
+.live-vote .vote-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.live-vote .progress {
+  height: 14px;
+  margin-top: 0.4rem;
+  background: #e9ecef; /* light track */
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* <progress> element styling for WebKit and Firefox */
+.live-vote progress.progress-bar {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 600;
+}
+.live-vote progress.progress-bar::-webkit-progress-bar {
+  background: transparent;
+  border-radius: 999px;
+}
+.live-vote progress.progress-bar::-webkit-progress-value {
+  background: linear-gradient(90deg, var(--accent-blue) 0%, #10b981 100%);
+  border-radius: 999px;
+  transition: width 800ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.live-vote progress.progress-bar::-moz-progress-bar {
+  background: linear-gradient(90deg, var(--accent-blue) 0%, #10b981 100%);
+  border-radius: 999px;
+  transition: width 800ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.live-vote progress.bg-secondary::-webkit-progress-value,
+.live-vote progress.bg-secondary::-moz-progress-bar {
+  background: #6c757d;
+}
+
+.live-vote small {
+  color: var(--text-secondary);
+}
+.live-vote #countYes,
+.live-vote #countNo {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.vote-confirmation {
+  display: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.vote-confirmation.show {
+  display: block;
+  animation: confirmPop 600ms ease forwards;
+}
+
+@keyframes confirmPop {
+  0% {
+    transform: translateY(-6px) scale(0.98);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(0) scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
