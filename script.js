@@ -1,24 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("faqSearch");
-  const accordionItems = document.querySelectorAll(".accordion-item");
+  const accordionItems = Array.from(
+    document.querySelectorAll(".accordion-item")
+  );
   const faqCounter = document.getElementById("faqCounter");
   const totalFaqs = accordionItems.length;
 
   function updateCounter(visibleCount) {
-    faqCounter.textContent = `Showing ${visibleCount} of ${totalFaqs} FAQs`;
+    if (faqCounter)
+      faqCounter.textContent = `Showing ${visibleCount} of ${totalFaqs} FAQs`;
   }
 
   function filterFAQs() {
+    if (!searchInput) return;
     const query = searchInput.value.toLowerCase().trim();
     let visibleCount = 0;
 
     accordionItems.forEach((item) => {
-      const question = item
-        .querySelector(".accordion-button")
-        .textContent.toLowerCase();
-      const answer = item
-        .querySelector(".accordion-body")
-        .textContent.toLowerCase();
+      const questionEl = item.querySelector(".accordion-button");
+      const answerEl = item.querySelector(".accordion-body");
+      const question = questionEl ? questionEl.textContent.toLowerCase() : "";
+      const answer = answerEl ? answerEl.textContent.toLowerCase() : "";
 
       if (question.includes(query) || answer.includes(query)) {
         item.style.display = "block";
@@ -29,15 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     updateCounter(visibleCount);
   }
+
   updateCounter(totalFaqs);
-  searchInput.addEventListener("input", filterFAQs);
+  if (searchInput) searchInput.addEventListener("input", filterFAQs);
 
-  // Voting features removed — the site is static. The script handles search/filter only.
-
-  // Theme toggle: default is dark (no class). Persist choice in localStorage.
+  // Theme toggle
   const themeToggleBtn = document.getElementById("themeToggle");
   const body = document.body;
-  const THEME_KEY = "site-theme"; // values: "dark" or "light"
+  const THEME_KEY = "site-theme";
 
   function applyTheme(theme) {
     if (theme === "light") {
@@ -49,17 +50,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Initialize from saved preference (if any)
   try {
     const saved = localStorage.getItem(THEME_KEY);
-    if (saved === "light" || saved === "dark") {
-      applyTheme(saved);
-    } else {
-      // default: dark (no class)
-      applyTheme("dark");
-    }
+    if (saved === "light" || saved === "dark") applyTheme(saved);
+    else applyTheme("dark");
   } catch (e) {
-    // localStorage may be unavailable; fallback to default dark
     applyTheme("dark");
   }
 
@@ -71,10 +66,57 @@ document.addEventListener("DOMContentLoaded", function () {
       try {
         localStorage.setItem(THEME_KEY, next);
       } catch (e) {
-        // ignore storage errors
+        /* ignore */
       }
     });
   }
 
-  // No other interactive widgets on this page.
+  // Prevent mobile/tablet page jump when opening/closing accordion items
+  (function preventAccordionJumpOnMobile() {
+    try {
+      const mq = window.matchMedia("(max-width: 1024px)");
+      const accordion = document.getElementById("faqAccordion");
+      if (!accordion) return;
+
+      let lastScroll = 0;
+
+      const saveScroll = (e) => {
+        lastScroll = window.scrollY || window.pageYOffset || 0;
+        try {
+          if (
+            e &&
+            e.currentTarget &&
+            typeof e.currentTarget.blur === "function"
+          )
+            e.currentTarget.blur();
+        } catch (er) {}
+      };
+
+      accordion.querySelectorAll(".accordion-button").forEach((btn) => {
+        btn.addEventListener("pointerdown", saveScroll, { passive: true });
+        btn.addEventListener("touchstart", saveScroll, { passive: true });
+        btn.addEventListener("click", saveScroll);
+      });
+
+      function restoreScroll(targetScroll) {
+        [0, 80, 160].forEach((delay) => {
+          setTimeout(() => {
+            try {
+              window.scrollTo({ top: targetScroll, behavior: "auto" });
+            } catch (err) {}
+          }, delay);
+        });
+      }
+
+      accordion.addEventListener("hidden.bs.collapse", function () {
+        restoreScroll(lastScroll);
+      });
+
+      accordion.addEventListener("shown.bs.collapse", function () {
+        restoreScroll(lastScroll);
+      });
+    } catch (err) {
+      console.error("preventAccordionJumpOnMobile error", err);
+    }
+  })();
 });

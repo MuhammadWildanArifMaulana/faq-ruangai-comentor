@@ -140,6 +140,14 @@ body {
   text-decoration: underline;
 }
 
+/* Make long links wrap on small screens to avoid overflow */
+.accordion-body a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  display: inline; /* keep it inline but allow wrapping */
+  max-width: 100%;
+}
+
 /* Responsive adjustments: tablet and mobile */
 @media (max-width: 991.98px) {
   .simple-header {
